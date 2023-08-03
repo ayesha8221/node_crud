@@ -1,0 +1,26 @@
+{
+  "user1": {
+    "id": 1,
+    "name": "Ayesha",
+    "surname": "Galant",
+    "profession": "Web Developer"
+  },
+  "user2": {
+    "id": 2,
+    "name": "Asiphe",
+    "surname": "Ndimlana",
+    "profession": "Football Player"
+  },
+  "user3": {
+    "id": 3,
+    "name": "Mufuniwa",
+    "surname": "Mbedzi",
+    "profession": "Software Developer"
+  },
+  "user4": {
+    "id": 4,
+    "name": "Ethan",
+    "surname": "Lesar",
+    "profession": "entrepreneur"
+  }
+}
