@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 
 var fs = require("fs");
 
@@ -22,7 +22,7 @@ app.get("/addUser", (req, res) => {
   
       users["user4"] = newUser;
   
-      const updatedData = JSON.stringify(users, null, 2);
+      const updatedData = JSON.stringify(users, null, 4);
   
       fs.writeFile(__dirname + "/" + "db.json", updatedData, (err) => {
         if (err) {
@@ -47,9 +47,6 @@ app.get('/listItems', function (req, res) {
 
 // Delete User
 
-// var id = 2
-
-// users["id"] = deletedUser
 
 app.get("/deleteUser/:id", (req, res) => {
     const userId = req.params.id;
@@ -60,11 +57,11 @@ app.get("/deleteUser/:id", (req, res) => {
       }
   
       const users = JSON.parse(data);
-      if (!users.hasOwnProperty(`user${userId}`)) {
-        return res.status(404).send(`User with ID ${userId} not found.`);
+      if (!users.hasOwnProperty(`user${4}`)) {
+        return res.status(404).send(`User with ID ${4} not found.`);
       }
   
-      delete users[`user${userId}`];
+      delete users[`user${4}`];
   
       const updatedData = JSON.stringify(users, null, 2);
   
@@ -74,12 +71,49 @@ app.get("/deleteUser/:id", (req, res) => {
           return res.status(500).send("Error writing data to file.");
         }
   
-        console.log(`User with ID ${userId} deleted successfully!`);
-        res.send(`User with ID ${userId} deleted successfully!`);
+        console.log(`User with ID ${4} deleted successfully!`);
+        res.send(`User with ID ${4} deleted successfully!`);
       });
     });
   });
   
+
+  //Update user
+app.get("/updateUser/:id", (req, res) => {
+  const userId = req.params.id;
+  fs.readFile(__dirname + "/" + "db.json", "utf8", function (err, data) {
+    if (err) {
+      console.error("Error reading the file: ", err);
+      return res.status(500).send("Error reading data.json file.");
+    }
+
+    const users = JSON.parse(data);
+    if (!users.hasOwnProperty(`user${4}`)) {
+      return res.status(404).send(`User with ID ${4} not found.`);
+    }
+
+    const updatedUser = {
+      id: Number(4),
+      name: "Luke",
+      surname: "Evertson",
+      profession: "gaslighter"
+    };
+
+    users[`user${4}`] = updatedUser;
+
+    const updatedData = JSON.stringify(users, null, 2);
+
+    fs.writeFile(__dirname + "/" + "db.json", updatedData, (err) => {
+      if (err) {
+        console.error("Error writing to data.json file: ", err);
+        return res.status(500).send("Error writing data to file.");
+      }
+
+      console.log(`User with ID ${4} updated successfully!`);
+      res.send(`User with ID ${4} updated successfully!`);
+    });
+  });
+});
 
 
 
